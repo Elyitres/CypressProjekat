@@ -1,0 +1,25 @@
+describe('Test create issue feature on github', () => {
+    it('creates an issue and checks whether it is present among labels', () => {
+        cy.login(Cypress.env('username'), Cypress.env('password')) 
+        cy.visit('https://github.com/Cypress0503/ffff')
+        cy.get('#issues-tab').click()
+        cy.get('.ml-3 > .btn').click()
+        cy.get('#issue_title').type('This is a test')
+        cy.get('.css-truncate > .btn-link').click()
+        cy.get('#labels-select-menu > .text-bold').click()
+        cy.get(':nth-child(1) > .select-menu-item-text > :nth-child(3) > .css-truncate').click()
+        cy.get(':nth-child(2) > .select-menu-item-text > :nth-child(3) > .css-truncate').click()
+        cy.get('#labels-select-menu > .text-bold').click()
+        cy.get('.flex-justify-end > .btn-primary').click()
+        cy.visit('https://github.com/Cypress0503/ffff/issues')
+        cy.get('div[id^=issue]').first()
+              .should('include.text','This is a test')
+              .should('include.text', 'bug')
+              .and('include.text', 'documentation')
+        //.contains('This is a test')
+            //.should('have.href', '/Cypress0503/ffff/issues?q=is%3Aissue+is%3Aopen+label%3Abug')
+            //.and('have.href', '/Cypress0503/ffff/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation')
+
+               
+    })
+})

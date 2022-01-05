@@ -23,4 +23,19 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add('login', (username, password) => {})
+Cypress.Commands.add('login', (username, password) => {
+    cy.visit('https://github.com')
+        cy.viewport(1024, 768)
+        cy.get('.mr-3 > .HeaderMenu-link').click()
+        cy.get('#login_field').type(username)
+        cy.get('#password').type(password)
+        cy.get('.btn').click()
+})
+
+Cypress.Commands.add('deleteRepository', () => {
+
+    cy.get('[data-content="Settings"]').click()
+    cy.get(':nth-child(4) > .details-reset > .boxed-action').click()
+    cy.get('.Box-body > form > p > .form-control').type('Cypress0503/QA-Test')
+    cy.get('.Box-body > form > .btn-danger > .d-md-inline-block').click()
+})
