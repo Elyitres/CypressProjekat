@@ -1,5 +1,5 @@
 describe('Test create issue feature on github', () => {
-    it('creates an issue and checks whether it is present among labels', () => {
+    it('creates an issue and checks whether it is present along with selected labels', () => {
         cy.login(Cypress.env('username'), Cypress.env('password')) 
         cy.visit('https://github.com/Cypress0503/ffff')
         cy.get('#issues-tab').click()
@@ -16,10 +16,14 @@ describe('Test create issue feature on github', () => {
               .should('include.text','This is a test')
               .should('include.text', 'bug')
               .and('include.text', 'documentation')
-        //.contains('This is a test')
-            //.should('have.href', '/Cypress0503/ffff/issues?q=is%3Aissue+is%3Aopen+label%3Abug')
-            //.and('have.href', '/Cypress0503/ffff/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation')
+              
+    })
 
-               
+    it('closes an opened issue', () => {
+        cy.get('.mr-3 > input').click()
+        cy.get('[data-url$="Factions_content"] > .select-menu-button').click()
+        cy.get('[value="closed"] > .select-menu-item-text').click()                
+
+
     })
 })
