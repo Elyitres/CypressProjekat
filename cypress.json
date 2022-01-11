@@ -1,7 +1,13 @@
 {
     "env": 
     {
+        "baseUrl": "http://localhost:50369",
+        "repositoryName" : "QA-Test",
         "username" : "Cypress0503",
-        "password": "Test123github"
-    }
+        "password": "Test123github",
+        "description" : "This is description"
+    },
+
+    "chromeWebSecurity": false
 }
+
